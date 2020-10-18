@@ -1,4 +1,4 @@
-reimport { observer } from 'mobx-react'
+import { observer } from 'mobx-react'
 import React from 'react'
 import { stores } from '../stores'
 
