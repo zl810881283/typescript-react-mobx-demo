@@ -1,9 +1,10 @@
-import { action, computed, observable, runInAction } from "mobx";
+import { makeAutoObservable, runInAction } from "mobx";
 export class Production {
-  @observable
+  constructor(){
+    makeAutoObservable(this)
+  }
   name: string = ""
 
-  @observable
   isShowAll: boolean = true
 
   sourceList = [
@@ -15,19 +16,17 @@ export class Production {
     { category: "Electronics", price: "$199.99", stocked: true, name: "Nexus 7" }
   ];
 
-  @computed 
   get list() {
     return this.sourceList.filter(i => i.name.match(new RegExp(`^${this.name}`)))
   }
 
-  @action
   handleNameChange = (name: string) => {
     console.log(name)
     runInAction(() => {
       this.name = name
     })
   }
-  @action
+  
   handleIsShowChange = (isShowAll: boolean) => {
     runInAction(() => {
       this.isShowAll = isShowAll
